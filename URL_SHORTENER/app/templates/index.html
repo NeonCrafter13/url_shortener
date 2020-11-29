@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href={{ url_for('static', filename='css/style.css') }}>
+    </head>
+    <body>
+        <h1>URL-Shortener</h1>
+        <h2>Create you own short URL</h2>
+        <div class="f">
+            <form>
+                <label for="URL">URL</label>
+                <br>
+                <input type="url" id="URL">
+                <br>
+                <label for="TOKEN">TOKEN</label>
+                <br>
+                <input type="str" maxlength="5" id="TOKEN" placeholder="If not specified, will be generated random">
+            </form>
+            <button onclick="generate();">Generate URL</button>
+            <p id="info"></p>
+        </div>
+    </body>
+    <script>
+        async function generate(){
+            let url = document.getElementById("URL").value
+            let token = document.getElementById("TOKEN").value
+            let data = {"url": url, "token": token}
+            const resp = await fetch("{{ url_for('create_url')}}",{
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            const json = await resp.json();
+            if (json.succes == false){
+                let info = document.getElementById("info")
+                info.setAttribute("style", "background-color: red;")
+                info.innerHTML = json.error
+                console.log(json.error) //Show ERROR
+            } else {
+                let info = document.getElementById("info")
+                info.setAttribute("style", "background-color: green;")
+                info.innerHTML = json.token
+                console.log(json.token) //Show token
+            }
+
+        }
+    </script>
+</html>

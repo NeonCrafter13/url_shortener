@@ -9,7 +9,7 @@ Config = Config()
 
 @app.route("/")
 def index():
-    return templating.render_template("index.html")
+    return templating.render_template("index.html", maxlength = Config.url_length)
 
 @app.route("/r/<token>")
 def token(token):

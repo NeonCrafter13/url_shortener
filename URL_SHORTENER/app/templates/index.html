@@ -23,24 +23,24 @@
     </body>
     <script>
         async function generate(){
-            let url = document.getElementById("URL").value
-            let token = document.getElementById("TOKEN").value
-            let data = {"url": url, "token": token}
+            let url = document.getElementById("URL").value;
+            let token = document.getElementById("TOKEN").value;
+            let data = {"url": url, "token": token};
             const resp = await fetch("{{ url_for('create_url')}}",{
                 method: 'POST',
                 body: JSON.stringify(data)
             });
             const json = await resp.json();
             if (json.succes == false){
-                let info = document.getElementById("info")
-                info.setAttribute("style", "background-color: red;")
-                info.innerHTML = json.error
-                console.log(json.error) //Show ERROR
+                let info = document.getElementById("info");
+                info.setAttribute("style", "background-color: red;");
+                info.innerHTML = json.error;
+                console.log(json.error); //Show ERROR
             } else {
-                let info = document.getElementById("info")
-                info.setAttribute("style", "background-color: green;")
-                info.innerHTML = json.token
-                console.log(json.token) //Show token
+                let info = document.getElementById("info");
+                info.setAttribute("style", "background-color: green;");
+                info.innerHTML = json.token;
+                console.log(json.token); //Show token
             }
 
         }

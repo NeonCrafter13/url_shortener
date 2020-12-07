@@ -39,7 +39,7 @@
             } else {
                 let info = document.getElementById("info");
                 info.setAttribute("style", "background-color: green;");
-                info.innerHTML = json.token;
+                info.innerHTML = "<a href=/r/" +json.token + ">" + json.token + "</a>"
                 console.log(json.token); //Show token
             }
 

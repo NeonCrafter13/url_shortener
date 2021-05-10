@@ -9,7 +9,7 @@ Config = Config()
 
 @app.route("/")
 def index():
-    return templating.render_template("index.html", maxlength = Config.url_length)
+    return templating.render_template("index.html", maxlength=Config.url_length)
 
 @app.route("/r/<token>")
 def token(token):
@@ -50,8 +50,8 @@ def create_url():
         )
 
     return jsonify(
-            {"succes": True, "token": token}
-        )
+        {"succes": True, "token": token}
+    )
 
 if __name__ == "__main__":
     app.run("127.0.0.1", "5000")
